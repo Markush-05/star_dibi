@@ -1,0 +1,21 @@
+.app-header {
+  margin-bottom: 10px;
+    display: flex!important;
+    justify-content: space-around;
+    align-items: baseline;
+  }
+  
+  .app-header h1 {
+    flex-grow: 1;
+  }
+  
+  .app-header .list-unstyled .float-end {
+    padding: 0 15px;
+
+  }
+
+  .app-header .list-unstyled .float-end a {
+        
+    text-decoration: none;
+
+  }

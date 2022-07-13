@@ -1,0 +1,17 @@
+.planet-details{
+    padding: 15px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    flex-direction: row;
+
+}
+
+.person-image{
+    width: 45%;
+    border-radius: 50px;
+}
+
+.crd-body {
+    width: 50%;
+}
+
