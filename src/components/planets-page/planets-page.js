@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
-import './people-page.css';
-
-import ItemList from '../item-list';
-//import PerrsonDetails from '../perrson-details';
-
+import './planets-page.css';
 
 import ErrorBoundery from '../error-boundery'
 import Row from '../row'
+
 import { withRouter } from 'react-router-dom';
 
+
 import {
-    PersonList,
-    PlanetList,
-    StarshipList,
-    PersonDetails,
-    PlanetDetails,
-    StarshipDetails
-  
-  }from '../sw-components'
+    PlanetDetails, 
+    PlanetList}from '../sw-components'
   
 
-export default class PeoplePage extends Component {
+export default class PlanetPage extends Component {
 
     state= {
         selectedPerson: 5,
@@ -28,7 +20,7 @@ export default class PeoplePage extends Component {
     }
 
     ifOnClik = (id) => {
-        console.log(this.props.history.push(id))
+        console.log(this.props.history.push('/planets/'+id))
     }
 
     onPersonSelected = (id) => {
@@ -40,14 +32,14 @@ export default class PeoplePage extends Component {
 
 
         const itemLisr = (   
-            <PersonList onItemSelected={this.onPersonSelected}/> 
+            < PlanetList  onItemSelected={this.onPersonSelected}/> 
             
         )
 
         const personDitels = (
             <ErrorBoundery>
-               <PersonDetails itemId={this.state.selectedPerson}
-                ifOnClik={this.ifOnClik}/>
+               <PlanetDetails itemId={this.state.selectedPerson}
+               ifOnClik={this.ifOnClik}/>
             </ErrorBoundery>
         )
         

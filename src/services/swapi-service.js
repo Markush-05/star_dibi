@@ -21,11 +21,16 @@ fetch('https://swapi.dev/api/films/1/')
 
 */
 
+
+
 export default class SwpiService {
 
-    _apiBase = "https://swapi.dev/api/"
+    _apiBase = 'https://swapi.dev/api/';
+    _imageBase = 'https://starwars-visualguide.com/assets/img';
     
-    async getResourcte (url) {
+  
+    
+    getResourcte = async (url) => {
       const res = await fetch(this._apiBase+url); 
       if (!res.ok){
         throw new Error ('Could not fetch'+ url +'receved')
@@ -35,34 +40,52 @@ export default class SwpiService {
       return body;
     };
   
-    async getAllPeople(){
+    getAllPeople = async () =>{
       const res = await this.getResourcte('people/');
-      return res.results.map(this._transformPerson)
+      return res.results
+      .map(this._transformStarships)
+      .slice(0, 10);
     }
   
-    async getPerson(id){
+    getPerson = async (id) =>{
       const res = await this.getResourcte('people/' + id+"/")
       return this._transformPerson(res)
     }
   
-    async getAllPlanets(){
+    getAllPlanets = async () =>{
       const res = await this.getResourcte('planets/');
       return res.results
+      .map(this._transformStarships);
     }
   
-    async  getPlanets(id){
+    getPlanets = async (id) =>{
       const planet = await this.getResourcte('planets/' + id+"/");
       return this._transformPlenet(planet)
     }
   
-    async getAllStarships(){
+    getAllStarships = async () =>{
       const res = await this.getResourcte('starships/');
       return res.results
+      .map(this._transformStarships)
+      .slice(0, 5);
     }
   
-    getStarships(id){
-      return this.getResourcte('starships/' + id+"/");
+    getStarships = async (id) =>{
+      const res = await this.getResourcte('starships/' + id+"/")
+      return this._transformStarships(res)
     }
+
+    getPersonImage = ({id}) => {
+      return `${this._imageBase}/characters/${id}.jpg`
+    };
+  
+    getStarshipImage = ({id}) => {
+      return `${this._imageBase}/starships/${id}.jpg`
+    };
+  
+    getPlanetImage = ({id}) => {
+      return `${this._imageBase}/planets/${id}.jpg`
+    };
 
     _extractId(item){
       const idRegExp = /\/([0-9]*)\/$/ ;
@@ -87,8 +110,8 @@ export default class SwpiService {
         name: starships.name,
         model: starships.model,
         manufacturer: starships.manufacturer,
-        costInCredits: starships.costInCredits,
-        lensth: starships.lensth,
+        costInCredits: starships.cost_in_credits,
+        length: starships.length,
         crew: starships.crew,
         passengers: starships.passengers,
         cargoCapacity: starships.cargoCapacity

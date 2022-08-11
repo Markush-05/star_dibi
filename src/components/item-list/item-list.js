@@ -1,51 +1,36 @@
 import React, { Component } from 'react';
 
 import './item-list.css';
-import SwpiService from '../../services/swapi-service'
-import Spinner from '../spinner'
+import { render } from '@testing-library/react';
 
-export default class ItemList extends Component {
+const ItemList = (props) => {
 
-  swapiService = new SwpiService();  
+  const { data, onItemSelected, children: renderLabel } = props;
 
-  state = {
-    peopleList: null
-  };
-
-  componentDidMount(){
-    this.swapiService.getAllPeople()
-    .then((peopleList) => {
-      this.setState({ peopleList });
-    });
-  }
-
-  renderItems(arr){
-    return arr.map (({id , name}) =>{
-      return(
-        <li className="list-group-item modal-header"
-         key={id} 
-         onClick={ () => this.props.onItemSelected(id) }>{name}
-        </li>
-         
-      )
-    })
-  }
+  const items = props.itemleList.map ((item) =>{
     
-  render() {
+    const label = renderLabel(item);
 
-    const { peopleList } = this.state;
-    if (!peopleList){
-      return <Spinner />
-    }
-
-    const items = this.renderItems(peopleList)
-
-    return (
-
-        <ul className="item-list modal-content">
-          {items}
-      </ul>
-
+    return(
+      <li className="list-group-item modal-header"
+       key={item.id} 
+       onClick={ () => props.onItemSelected(item.id) }>
+        {label}
+      
+      </li>
+       
     );
-  };
+  });
+  
+  return (
+
+      <ul className="item-list modal-content">
+        {items}
+    </ul>
+  );
+  
 }
+
+
+
+export default ItemList;

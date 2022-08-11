@@ -1,14 +1,27 @@
+.planet-details{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 .term{
     margin: 0 10px;
 }
 
 .btn-grup{
     display: flex;
-    flex-wrap: wrap;
+    
     justify-content: space-between;
 }
 
 .btn-grup .btn-warning{
     width: 40%;
     
+}
+
+
+.person-image{
+    width: 50%;
+}
+.person-list{
+    width: 50%;
 }

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import './perrson-details.css';
 import SwpiService from '../../services/swapi-service'
 import Spinner from '../spinner';
+import ErrorButton from '../error-button';
+
 
 
 export default class PerrsonDetails extends Component {
@@ -72,6 +74,7 @@ export default class PerrsonDetails extends Component {
                 </li>
             </ul>
         </div>
+        <ErrorButton/>
         
       </div>
     );

@@ -25,12 +25,16 @@ export default class RendomPlanet extends Component {
 
     componentDidMount() {
         //console.log('componentDidMount')
-        this.updatePlanet();
-        this.interval =  setInterval(this.updatePlanet, 5000);
+        if (!this.state.delet){
+            this.interval =  setInterval(this.updatePlanet, 5000);
+        }else{
+            clearInterval(this.interval);
+        }
+        
     }
     componentWillUnmount() {
-       /// console.log('ON_delet')
-       clearInterval(this.interval);
+        console.log('ON_delet')
+        clearInterval(this.interval);
     }
 
     onPlanetLoaded = (planet) =>{
@@ -56,7 +60,7 @@ export default class RendomPlanet extends Component {
 
     updatePlanet = () => {
         const id = Math.floor(Math.random()*17 + 2);
-        //console.log('uptdetPlenet')
+        console.log('uptdetPlenet')
         this.swpiService.getPlanets(id)
         .then(this.onPlanetLoaded)
         .catch(this.onError);
@@ -64,10 +68,7 @@ export default class RendomPlanet extends Component {
          
     };
 
-    timeout (planet){
-        console.log("Sett")
-        console.log(this.state)
-    }
+
 
     
 
@@ -80,7 +81,7 @@ export default class RendomPlanet extends Component {
         const spinner = loading ? <Spinner/> : null;
         const content = dade ? <PlanetView planet={planet}/> :null ;
 
-        console.log(typeof content)
+        
 
         const object3 =  !delet ? {... errorMessage, ... content , ... spinner } : null;
     
@@ -109,8 +110,9 @@ const PlanetView = ({planet})=> {
 
     return (
         <React.Fragment>
+            
              <img className='person-image' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}></img>
-                <div className='crd-body '>
+                <div className='crd-body person-list'>
                     <h4>{name}</h4>
                     <ul className='list-group list-group-flush'>
                         <li className='list-group-item'>
